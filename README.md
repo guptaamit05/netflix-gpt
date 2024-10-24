@@ -31,3 +31,9 @@
         search Bar
         Movie suggestions
 
+rafce: React Arrow Function Component export.
+
+# Setup React Router DOM
+    npm i -D react-router-dom
+
+Formik library..

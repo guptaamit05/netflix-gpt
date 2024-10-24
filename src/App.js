@@ -1,15 +1,15 @@
-import "./App.css";
+import Body from "./components/Body";
 
 /**
  * Setup tailwind
+ * Setup React Router DOM
+ * Header
+ * Login
+ * SignUp
  * 
-*/
+ */
 function App() {
-  return (
-    <div className="App">
-      <h1 className="text-xl bg-gray-300">Hello Netflix</h1>
-    </div>
-  );
+  return <Body />;
 }
 
 export default App;

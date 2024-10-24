@@ -1,15 +1,29 @@
+import { Provider } from "react-redux";
 import Body from "./components/Body";
+import appStore from "./utils/appStore"
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login";
+import Browse from "./components/Browse";
 
-/**
- * Setup tailwind
- * Setup React Router DOM
- * Header
- * Login
- * SignUp
- * 
- */
 function App() {
-  return <Body />;
+
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/browse",
+      element: <Browse />,
+    },
+  ]);
+  return (
+    <Provider store={appStore}>
+       <RouterProvider router={appRouter}>
+      <Body />
+      </RouterProvider>
+    </Provider>
+  );
 }
 
 export default App;

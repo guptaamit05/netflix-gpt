@@ -91,9 +91,12 @@ Embeded the youtube video and make it autoplay and mute.
 
 Now create Browse Page to show all the movies getting from API:
 
+created MovieList and MOvieCard page
+Fetching:
+    TOP RATED
+    POPULAR
+    TRENDING
+    NOW PLAYING Movies list
 
+Created custom Hooks for each type of movie we are feching..
 
-  
- 
- */
- 

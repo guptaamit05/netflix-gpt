@@ -3,7 +3,6 @@ import { useGetMovieTrailer } from "../hooks/useGetMovieTrailer";
 
 const VideoBackground = ({ movieId }) => {
   const selector = useSelector((store) => store.movies?.movieTrailer);
-  console.log("amit")
   useGetMovieTrailer(movieId);
 
   return (

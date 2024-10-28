@@ -13,7 +13,6 @@ const MainContainer = () => {
     <div className="pt-16">
       <VideoTitle title={original_title} overview = {overview} />
       <VideoBackground movieId={id} />
-      Video Title,
     </div>
   );
 };

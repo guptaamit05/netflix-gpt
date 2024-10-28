@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 
 export const useNowPlayingMovies = () => {
-  console.log("dddddddddddddddddd")
+
   const dispatch = useDispatch();
   const getNowPlayingMovies = async () => {
     const data = await fetch(API_URL, API_OPTIONS);

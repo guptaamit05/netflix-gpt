@@ -7,14 +7,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { RANDOM_USER_PHOTO } from "../utils/constant";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
@@ -44,22 +43,20 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const currentUser = userCredential.user;
-          let randomU = Math.floor(Math.random()*100)
+  
           updateProfile(currentUser, {
             displayName: name.current.value,
-            photoURL: "https://randomuser.me/api/portraits/men/"+randomU+".jpg",
+            photoURL: RANDOM_USER_PHOTO
           })
             .then(() => {
               // Profile updated!
               const {uid, email, displayName, photoURL} = auth.currentUser
               // update profilePic and name data in appStore..
               dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}))
-              navigate("/browse");
-              // ... 
+
             })
             .catch((error) => {
               // An error occurred
-              // const errorCode = error.code;
               const errorMessage = error.message;
               setErrorMsg( errorMessage);
             });
@@ -85,8 +82,7 @@ const Login = () => {
           const {uid, email, displayName, photoURL} = user
           // update profilePic and name data in appStore..
           dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}))
-          navigate("/browse");
-          // ...
+
         })
         .catch((error) => {
           const errorCode = error.code;

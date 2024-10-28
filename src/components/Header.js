@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../utils/userSlice";
+import { removeUser, addUser } from "../utils/userSlice";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userD = useSelector((store) => store.user);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    //Unsubscribe when component unmount...
+    return () =>unsubscribe()
+
+  }, []);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -26,12 +54,12 @@ const Header = () => {
     <div className="absolute bg-gradient-to-b from-red-700 h-16 w-screen z-10 flex justify-between items-center p-5">
       <img
         className="w-28 cursor-pointer mix-blend-multiply"
-        src="https://banner2.cleanpng.com/20180702/qac/aax1p8e04.webp"
+        src="logo.webp"
         alt="Netflix-logo"
       />
       {userD && (
         <div className="flex">
-          <img
+          <img title={userD ? userD?.displayName : ""}
             src={userD ? userD?.photoURL : "user.jpg"}
             className="h-12 mix-blend-multiply rounded-full"
             alt="userProfileImg"

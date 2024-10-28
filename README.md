@@ -69,9 +69,31 @@ Formik library.. (best for Form creation, validation....)
  Implemented SignOut feature
  Update Profile also
  Fetch Movies data from TMDB   
-    
+
+ Bug Fix, logged user and withou login user redirecting...   
+ Bug fix for : Unsubscribe when component unmount...
+
+# Add HARD coded value in content.js file
+
+Now go to TMDB site:
+    Login to TMDB
+    go to edit profile
+    go to API on left side (find API Key)
+    if you not create an APP, then create an app then you will get your API key and access token..
+
+Call now_playing API on /browse page.
+NOTE:  React does extra rending of your comp to check inconsistency between call
+
+Now create a custom hook and try to move api call code to custom Hook in browse Component...
+
+Fetch data for Trailer data to show on Background...
+Embeded the youtube video and make it autoplay and mute.
+
+Now create Browse Page to show all the movies getting from API:
+
+
+
+  
  
- * 
- * 
  */
  

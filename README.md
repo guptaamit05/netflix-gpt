@@ -106,7 +106,11 @@ Now create Two component GPT Search Bar and GPTMovie Suggestion...
 Now create a languageConstant file that contains hindi, english and spanish text for GPT search Bar Component (for now, but we can create for all pages...)
 Implemented multi-language feature to gpt search page.
 
+Now you have to create account (login with gmail on:) on 
+https://platform.openai.com/settings/organization/api-keys
+and get the API_Key
 
+npm install --save openai
 
 
 

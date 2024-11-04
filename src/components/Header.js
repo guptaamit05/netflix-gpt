@@ -5,11 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser, addUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
+import { toggleGPTSearchView } from "../utils/gptSlice";
+import { changeLang } from "../utils/configSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constant";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userD = useSelector((store) => store.user);
+  const toggleGPTBtnText = useSelector((store) => store.gpt.showGptSearch);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -29,12 +33,14 @@ const Header = () => {
       } else {
         // User is signed out
         dispatch(removeUser());
+        if (toggleGPTBtnText) {
+          handleGptSearch();
+        }
         navigate("/");
       }
     });
     //Unsubscribe when component unmount...
-    return () =>unsubscribe()
-
+    return () => unsubscribe();
   }, []);
 
   const handleSignOut = () => {
@@ -50,6 +56,16 @@ const Header = () => {
       });
   };
 
+  const handleGptSearch = () => {
+    // Toggle GPTSearh Page...
+    dispatch(toggleGPTSearchView());
+  };
+
+  const handleLangChange = (e) => {
+    // console.log(e.target.value)
+    dispatch(changeLang(e.target.value));
+  };
+
   return (
     <div className="absolute bg-gradient-to-b from-red-700 h-16 w-screen z-10 flex justify-between items-center p-5">
       <img
@@ -59,7 +75,26 @@ const Header = () => {
       />
       {userD && (
         <div className="flex">
-          <img title={userD ? userD?.displayName : ""}
+          {toggleGPTBtnText && (
+            <select
+              onChange={handleLangChange}
+              className="py-2 px-2 mx-4 my-2 bg-gray-900 text-white"
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
+          <button
+            onClick={handleGptSearch}
+            className="py-2 px-4 mx-4 my-2 bg-blue-400"
+          >
+            {toggleGPTBtnText ? "Home" : "GPT Search"}
+          </button>
+          <img
+            title={userD ? userD?.displayName : ""}
             src={userD ? userD?.photoURL : "user.jpg"}
             className="h-12 mix-blend-multiply rounded-full"
             alt="userProfileImg"

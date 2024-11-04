@@ -100,3 +100,13 @@ Fetching:
 
 Created custom Hooks for each type of movie we are feching..
 
+
+First create a link of GPT Search Feature.
+Now create Two component GPT Search Bar and GPTMovie Suggestion...
+Now create a languageConstant file that contains hindi, english and spanish text for GPT search Bar Component (for now, but we can create for all pages...)
+Implemented multi-language feature to gpt search page.
+
+
+
+
+

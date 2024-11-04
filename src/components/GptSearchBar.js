@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import lang from "../utils/languageConstant";
 import { useSelector } from "react-redux";
-import clientopenai from "../utils/openAI";
+// import clientopenai from "../utils/openAI";
 
 const GptSearchBar = () => {
   const langKey = useSelector((store) => store.configapp.lang);
@@ -9,12 +9,11 @@ const GptSearchBar = () => {
 
   const callOpenAIAPI = async () => {
     // call the openAI GPT api to get movie result based on text box text   ..
-    // console.log(searchText.current.value)
-    const apiResult = await clientopenai.chat.completions.create({
-      messages: [{ role: "user", content: searchText.current.value }],
-      model: "gpt-3.5-turbo",
-    });
-    console.log(apiResult)
+    // const apiResult = await clientopenai.chat.completions.create({
+    //   messages: [{ role: "user", content: searchText.current.value }],
+    //   model: "gpt-3.5-turbo",
+    // });
+
   };
 
   return (

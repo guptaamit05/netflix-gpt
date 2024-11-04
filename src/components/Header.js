@@ -62,7 +62,6 @@ const Header = () => {
   };
 
   const handleLangChange = (e) => {
-    // console.log(e.target.value)
     dispatch(changeLang(e.target.value));
   };
 
